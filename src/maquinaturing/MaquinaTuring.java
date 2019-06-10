@@ -12,6 +12,7 @@ public class MaquinaTuring {
         String patron = ("(0)|(1)|( )|([^01 ])");
         String tokenA, tokenB, tokenVacio, tokenError, cinta [] = new String [texto.length()+10];
         int pos = 5;    //evita borrar los caraceres vacios de las orillas
+      
         for (int i = 0; i < (texto.length()+10); i++) {
             cinta[i] = "□"; //5 caracteres vacios al inicio y final de la cinta
         }
@@ -51,6 +52,7 @@ public class MaquinaTuring {
                 if (cinta[pos].equals("(0)")) {
                         cinta[pos] = "0";
                 }
+                try{
                 if (estado==0 && puntero == false) {
                     pos = pos - 1;  //puntero se mueve a la izquierda
                     cinta[pos] = "("+cinta[pos]+")";
@@ -92,13 +94,14 @@ public class MaquinaTuring {
                     cinta[pos] = "("+cinta[pos]+")";
                     estado ++;
                     puntero = true;
-                }
-                else if (estado==7 && puntero == false) {
-                    pos = pos + 1;  //puntero se mueve a la derecha
+                }                     
+                else  if (estado==7 && puntero == false) {
+                          
+                     pos = pos + 1;  //puntero se mueve a la derecha
                     cinta[pos] = "("+cinta[pos]+")";
                     estado ++;
-                    puntero = true;
-                }
+                    puntero = true;                
+                }                       
                 else if (estado==8 && puntero == false) {
                     pos = pos + 1;  //puntero se mueve a la derecha
                     cinta[pos] = "("+cinta[pos]+")";
@@ -180,7 +183,11 @@ public class MaquinaTuring {
                     //ciclo de estado
                     puntero = true;
                 }
+            }catch(Exception e){
+                    System.out.println("adsfg");
+            }
             }//reconociendo caracter valido "b"
+            
             else if(cinta[pos].equals("1")||cinta[pos].equals("(1)")){
                 if (cinta[pos].equals("(1)")) {
                         cinta[pos] = "1";
@@ -460,15 +467,18 @@ public class MaquinaTuring {
         }while(estado != 20 && finalEstado.equals("\tVERDE"));
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         String texto;
         
         System.out.println("*****Maquina de Turing*****");
         
         System.out.print("Escriba su codigo: ");
         texto = teclado.nextLine();
+      try{
         iniciarCinta(texto);
-        
+      }catch(Exception e){
+          System.out.println("\n\n\tRojo");
+      }
         System.out.println("\nFin del programa...");
     }
     
